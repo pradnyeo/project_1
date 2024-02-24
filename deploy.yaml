@@ -1,0 +1,12 @@
+---
+- hosts: dev
+  become: true
+  gather_facts: true
+  tasks:
+    - name: deploy container on server
+      docker_container:
+        name: webapp
+        image: pradnyeo/project_1:${{BUILD_ID}}
+        state: started
+        published_ports:
+          - 0.0.0.0:8085:8080
